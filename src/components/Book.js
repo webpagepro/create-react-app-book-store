@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const Book = (props) => {
-  console.log("Book: ", props.item.book)
+  console.log("Book: ", props.book)
     return (
 
       <div className="list-group-item">
