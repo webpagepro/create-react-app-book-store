@@ -7,7 +7,7 @@ const Book = (props) => {
 
       <div className="list-group-item">
       <div className="row">
-          <div className="col-md-4">{props.book.title}</div>
+          <div className="col-md-4">{props.bnewCartBookook.title}</div>
           <div className="col-md-2">{props.book.author}</div>
           <div className="col-md-2">{props.book.Price}</div>
           <div className="col-md-2">{props.book.publisher}</div>
