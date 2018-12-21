@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import BookList from './components/BookList.js';
+import Books from './components/Books';
 import Search from './components/Search.js';
 import Header from './components/Header.js';
-//import from './components/BookCart';
+//import BookCart from './components/BookCart';
 import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
-import Book from './components/Book';
 
 import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios'
@@ -16,11 +15,13 @@ class App extends Component {
 
   state = {
     books: [],
-   bookCartList: [],
-   total:0,
-   availableBooks: []
+    booksInCart: [],
+    total:0,
+    availableBooks: []
 }
 
+ //booksInCart = () => this.state.books.filter (book => book.inCart)
+ 
 
 async componentDidMount() {
   const response = await fetch('http://localhost:8082/api/books')
@@ -37,7 +38,7 @@ async componentDidMount() {
 
 displayBooks = (e) => {
 this.setState({ 
-   availableBooks : e.target.value})
+   display_books : e.target.value})
 }
 
 
@@ -59,16 +60,19 @@ removeBookFromCart = id => {
 }
 
 render() {
-    
+  console.log("addBookToCart  ", this.addBookToCart)
+
     return (
       <div className="App">
       <Container>
      <Header/>
      <Search />
      <TopNavBar />
-   
-   <Row>    
-     {/*<BookList/>   */}
+     
+   <Row>   
+<Books books={this.state.books}/>
+    
+     
       </Row>    
              <Footer copy="2018" />
 </Container> 
@@ -76,7 +80,7 @@ render() {
 
 )
 }
-
 }
+
 
 export default App;

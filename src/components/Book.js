@@ -1,19 +1,20 @@
 import React from 'react'
-
+import { Card, Button, CardTitle, CardSubtitle, CardAuthor,CardText, Row } from 'reactstrap'
 
 const Book = (props) => {
-  console.log("Book: ", props.book)
+  console.log("Book JS: ", props.book.id)
     return (
-
+ 
       <div className="list-group-item">
-      <div className="row">
-          <div className="col-md-4">{props.bnewCartBookook.title}</div>
-          <div className="col-md-2">{props.book.author}</div>
-          <div className="col-md-2">{props.book.Price}</div>
-          <div className="col-md-2">{props.book.publisher}</div>
-          <div className="col-md-2">{props.book.description}</div>
-         
-        </div> 
+    
+        <CardTitle>{props.book.title}</CardTitle> 
+         <CardSubtitle>{props.book.author}</CardSubtitle>
+     
+<CardText>{props.book.Price}</CardText>
+         <div className="col-md-12">{props.book.publisher}</div>
+          <div className="col-md-12">{props.book.description}</div> 
+          <Button onClick={() => props.addBookToCart(props.book.id)}>Add To Cart</Button>
+        
         
       </div>
   )
