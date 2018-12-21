@@ -14,14 +14,17 @@ import axios from 'axios'
 class App extends Component {
 
   state = {
+
     books: [],
     booksInCart: [],
     total:0,
-    availableBooks: []
+    availableBooks: [],
+    filtered_search: ''
 }
 
- //booksInCart = () => this.state.books.filter (book => book.inCart)
- 
+ booksInCart = () => this.state.booksInCart.filter (book => book.id)
+ booksInStore = () => this.state.books.filter (book => book.id)
+
 
 async componentDidMount() {
   const response = await fetch('http://localhost:8082/api/books')
@@ -32,48 +35,57 @@ async componentDidMount() {
   }
   
   this.setState({books: json})
+  if(this.state.books.inCart === true){
+    let newArr = [];
+    for(let i = 0; i < this.state.books.length; i++){
+      this.state.booksInCart.push(this.state.books.id[i])
+ console.log("In Cart: ", this.state.booksInCart)
+
+    }
+     
+      return newArr
+  }
+
   console.log("setState books api res", this.state.books)
 }
 
 
 displayBooks = (e) => {
 this.setState({ 
-   display_books : e.target.value})
+   booksInCart : e.target.value})
 }
 
 
  addBookToCart = id => {
-  axios.patch(`http://localhost:8082/api/books/add/${id}`)
+  axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
   .then(res => {
-    let inventory = this.state.books.filter(book => book.id !== id)
-    console.log("inventory",inventory)
-    this.setState({ books: [...inventory, res.data]})
+    let basket = this.state.booksInCart.filter(book => book.id !== id)
+    this.setState({ books: [...basket, res.data]})
   })
+  console.log("basket", this.booksInCart)  
+
 }
 
 removeBookFromCart = id => {
   axios.patch(`http://localhost:8082/api/books/remove/${id}`)
   .then(res => {
-    let inventory = this.state.books.filter(book => book.id !== id)
-    this.setState({ books: [...inventory, res.data]})
+    let remove = this.state.books.filter(book => book.id !== id)
+    this.setState({ books: [...remove, res.data]})
   })
 }
 
 render() {
-  console.log("addBookToCart  ", this.addBookToCart)
-
-    return (
+   return (
       <div className="App">
       <Container>
      <Header/>
      <Search />
      <TopNavBar />
      
-   <Row>   
-<Books books={this.state.books}/>
-    
      
-      </Row>    
+<Books books={this.state.books}/>
+ 
+          
              <Footer copy="2018" />
 </Container> 
 </div>

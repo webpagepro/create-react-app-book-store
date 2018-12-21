@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Card, Button, CardTitle, CardText, Row } from 'reactstrap'
 import Book from './Book'
 //let Books = ({props}) =>  {
 
@@ -10,24 +9,13 @@ render(){
   return <Book key={book.id} book={book} />
 
   })
-   console.log("Books JS", listedBooks)
 
         return (
                 
                 
         
                   <div>
-                 
-                          {/*  <Card > <Row>
-                             <CardTitle>Title</CardTitle>
-                                  <CardTitle>Author</CardTitle>
-                                <CardTitle>Price</CardTitle>
-                                <CardTitle>Description</CardTitle>
-                               </Row>
-                                </Card>
-                            */}
-                              {listedBooks} 
-
+                 {listedBooks} 
                     </div>             
                                        
         
