@@ -10,6 +10,7 @@ const sbutton = {
   }
 }
 
+
 const Book = (props) => {
   console.log("Book JS: ", props.book.inCart)
     return (

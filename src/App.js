@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+//import Books2 from './components/Books2';
 import Books from './components/Books';
 import Search from './components/Search.js';
 import Header from './components/Header.js';
-//import BookCart from './components/BookCart';
 import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 
@@ -19,11 +19,10 @@ class App extends Component {
     booksInCart: [],
     total:0,
     availableBooks: [],
-    filtered_search: ''
+    filteredBook: ''
 }
 
- booksInCart = () => this.state.booksInCart.filter (book => book.id)
- booksInStore = () => this.state.books.filter (book => book.id)
+  //booksInStore = () => this.state.booksInCart.filter (book => book.id)
 
 
 async componentDidMount() {
@@ -35,56 +34,53 @@ async componentDidMount() {
   }
   
   this.setState({books: json})
-  if(this.state.books.inCart === true){
-    let newArr = [];
-    for(let i = 0; i < this.state.books.length; i++){
-      this.state.booksInCart.push(this.state.books.id[i])
- console.log("In Cart: ", this.state.booksInCart)
+       console.log("setState books api res", this)
 
-    }
-     
-      return newArr
-  }
 
-  console.log("setState books api res", this.state.books)
 }
 
 
-displayBooks = (e) => {
+filterBookSearch = (e) => {
 this.setState({ 
-   booksInCart : e.target.value})
+  filtered_search : e.target.value})
 }
 
 
  addBookToCart = id => {
   axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
   .then(res => {
-    let basket = this.state.booksInCart.filter(book => book.id !== id)
-    this.setState({ books: [...basket, res.data]})
+    let add = this.state.booksInCart.filter(book => book.id != id)
+    this.setState({ books: [...add, res.data]})
   })
-  console.log("basket", this.booksInCart)  
+  console.log("add", this.booksInCart)  
 
 }
 
 removeBookFromCart = id => {
-  axios.patch(`http://localhost:8082/api/books/remove/${id}`)
+  axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
   .then(res => {
     let remove = this.state.books.filter(book => book.id !== id)
     this.setState({ books: [...remove, res.data]})
   })
 }
 
+
+booksInCart = () => this.state.books.filter (book =>  {
+  return book.inCart != false;   
+
+ })
+
+
 render() {
    return (
       <div className="App">
       <Container>
      <Header/>
-     <Search />
+     <Search filterBookSearch={this.filterBookSearch}/>
      <TopNavBar />
      
      
-<Books books={this.state.books}/>
- 
+<Books books ={this.booksInCart(this.state.books)}/>
           
              <Footer copy="2018" />
 </Container> 

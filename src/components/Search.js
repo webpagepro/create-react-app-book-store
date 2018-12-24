@@ -16,7 +16,7 @@ class Search extends Component {
                 <div className="search-books-bar">
                     <div
                         className="close-search"
-                        to='/'>Close
+                        to='/'>
                     </div>
                     <div className="search-books-input-wrapper">
                         <Input
