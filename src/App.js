@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import Books2 from './components/Books2';
+import Books2 from './components/Books2';
 import Books from './components/Books';
 import Search from './components/Search.js';
 import Header from './components/Header.js';
@@ -80,8 +80,9 @@ render() {
      <TopNavBar />
      
      
-<Books books ={this.booksInCart(this.state.books)}/>
-          
+<Books books ={this.state.books}/>
+<Books2 books ={this.booksInCart(this.state.books)}/>
+         
              <Footer copy="2018" />
 </Container> 
 </div>
