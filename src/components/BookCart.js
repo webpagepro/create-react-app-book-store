@@ -19,7 +19,7 @@ const BookCart = (props) => {
             <div className="col-md-12">{props.book.author}</div> 
                 <div className="col-md-12">${parseFloat(props.book.price).toFixed(2)}</div>
                   <div className="col-md-12">{props.book.description}</div> 
-                  <Button onClick={()=> props.addBookToCart(props.book.id)} style={sbutton.styles}>Add To Cart {props.book.id}</Button>
+                  <Button onClick={()=> props.removeBookFromCart(props.book.id)} style={sbutton.styles}>Remove From Cart ID: {props.book.id}</Button>
                 
                 
               </div>

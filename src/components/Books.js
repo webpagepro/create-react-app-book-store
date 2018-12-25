@@ -8,17 +8,12 @@ render(){
    let listedBooks = this.props.books.map(book => {
   return <Book key={book.id} book={book} />
 
-  })
-
+ 
+ })
         return (
-                
-                
-        
-                  <div>
+            <div>
                  {listedBooks} 
-                    </div>             
-                                       
-        
+                    </div>     
         )
 }
 

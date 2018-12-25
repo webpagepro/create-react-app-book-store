@@ -6,7 +6,7 @@ import Header from './components/Header.js';
 import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Card } from 'reactstrap';
 import axios from 'axios'
 
 
@@ -36,7 +36,6 @@ async componentDidMount() {
   this.setState({books: json})
        console.log("setState books api res", this)
 
-
 }
 
 
@@ -45,17 +44,13 @@ this.setState({
   filtered_search : e.target.value})
 }
 
-
- addBookToCart = id => {
+addBookToCart = id => {
   axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
   .then(res => {
-    let add = this.state.booksInCart.filter(book => book.id != id)
+    let add = this.state.books.filter(book => book.id == id)
     this.setState({ books: [...add, res.data]})
   })
-  console.log("add", this.booksInCart)  
-
 }
-
 removeBookFromCart = id => {
   axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
   .then(res => {
@@ -64,12 +59,13 @@ removeBookFromCart = id => {
   })
 }
 
+InCart = () => this.state.books.filter (book =>  {
+  return book.inCart !== false
+ }) 
 
-booksInCart = () => this.state.books.filter (book =>  {
-  return book.inCart != false;   
-
- })
-
+ OutCart = () => this.state.books.filter (book =>  {
+  return book.inCart === false
+ }) 
 
 render() {
    return (
@@ -79,10 +75,18 @@ render() {
      <Search filterBookSearch={this.filterBookSearch}/>
      <TopNavBar />
      
+    
+
+     <Col className='left-col'>
+<Books2 books = {this.InCart(this.state.books)}/>   
+      </Col>
      
-<Books books ={this.state.books}/>
-<Books2 books ={this.booksInCart(this.state.books)}/>
-         
+
+      <Col className='right-col'>
+<Books books ={this.OutCart(this.state.books)}/>    
+</Col>
+      
+      
              <Footer copy="2018" />
 </Container> 
 </div>

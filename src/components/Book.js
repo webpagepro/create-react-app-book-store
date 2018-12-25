@@ -11,8 +11,12 @@ const sbutton = {
 }
 
 
+
 const Book = (props) => {
-  console.log("Book JS: ", props.book.inCart)
+
+
+ console.log("Book JS: ", props.book.inCart)
+  
     return (
 <div className="list-group-item">
   <div className="col-md-12">{props.book.title}</div>
