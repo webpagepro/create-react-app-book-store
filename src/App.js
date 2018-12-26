@@ -9,8 +9,6 @@ import Footer from './components/Footer';
 import { Container, Row, Col, Card } from 'reactstrap';
 import axios from 'axios'
 
-
-
 class App extends Component {
 
   state = {
@@ -44,11 +42,11 @@ this.setState({
   filtered_search : e.target.value})
 }
 
-addBookToCart = id => {
+addBookToCart = (id) => {
   axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
   .then(res => {
-    let add = this.state.books.filter(book => book.id == id)
-    this.setState({ books: [...add, res.data]})
+    let add = this.state.books.filter(book => book.id !== id)
+    this.setState({ booksInCart: [...add, res.data]})
   })
 }
 removeBookFromCart = id => {
@@ -59,13 +57,18 @@ removeBookFromCart = id => {
   })
 }
 
-InCart = () => this.state.books.filter (book =>  {
+booksInCart = () => this.state.books.filter (book =>  {
   return book.inCart !== false
  }) 
 
  OutCart = () => this.state.books.filter (book =>  {
-  return book.inCart === false
+  
+
+
+ console.log("booksInCart ", this.state.booksInCart)
+ return book.inCart === false
  }) 
+ 
 
 render() {
    return (
@@ -83,7 +86,7 @@ render() {
 <Books books ={this.OutCart(this.state.books)}/>    
 </Col>
      <Col sm="12" md={{ size: 4, offset: 0}} >
-<Books2 books = {this.InCart(this.state.books)}/>   
+<Books2 books = {this.booksInCart(this.state.books)}/>   
       </Col> 
      </Row>   
              <Footer copy="2018" />
