@@ -76,17 +76,16 @@ render() {
      <TopNavBar />
      
     
+<Row>
 
-     <Col className='left-col'>
-<Books2 books = {this.InCart(this.state.books)}/>   
-      </Col>
      
-
-      <Col className='right-col'>
+     <Col sm="12" md={{ size: 8, offset: 0}} >
 <Books books ={this.OutCart(this.state.books)}/>    
 </Col>
-      
-      
+     <Col sm="12" md={{ size: 4, offset: 0}} >
+<Books2 books = {this.InCart(this.state.books)}/>   
+      </Col> 
+     </Row>   
              <Footer copy="2018" />
 </Container> 
 </div>

@@ -1,1 +1,10 @@
 
+.rightColumn{
+    position:relative;
+    top:-300;
+}
+.col-md-12 .price{
+    float:right;
+}
+
+body{font-size:2px;}

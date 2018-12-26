@@ -12,3 +12,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.rightColumn{
+  position:relative;
+  top:-300;
+}
+.col-md-12 .price{
+  float:right;
+}
+
+body{font-size:10;}
+
+.rightColumn  {
+     bottom: '800px'
+  }

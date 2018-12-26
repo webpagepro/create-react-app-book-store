@@ -11,9 +11,9 @@ render(){
  
  })
         return (
-            <div>
+            <>
                  {listedBooks} 
-                    </div>     
+                    </>     
         )
 }
 
