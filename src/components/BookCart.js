@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, CardTitle, CardText } from 'reactstrap'
+import axios from 'axios'
 
 const sbutton = {
     styles: {
@@ -21,19 +22,29 @@ const rightColumn = {
     }
 }
 
-const BookCart = (props) => {
+class BookCart extends Component {
+//const BookCart = (props) => {
+removeBookFromCart = id => {
+    axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
+    .then(res => {
+      let remove = this.props.books.filter(book => book.id !== id)
+      this.setState({ books: [...remove, res.data]})
+    })
+  }
+
+  render(){
     return (
         <div className="rightColumn"  style={rightColumn.styles}> Shopping Cart
-          <div className="title">{props.book.title}</div>
-            <div className="author">{props.book.author}</div> 
-                <div className="price-cart">${parseFloat(props.book.price).toFixed(2)}</div>
-                  <Button onClick={()=> props.removeBookFromCart(props.book.id)} style={sbutton.styles}>Remove ID: {props.book.id}</Button>
+          <div className="title">{this.props.book.title}</div>
+            <div className="author">{this.props.book.author}</div> 
+                <div className="price-cart">${parseFloat(this.props.book.price).toFixed(2)}</div>
+                  <Button onClick={()=> this.removeBookFromCart(this.props.book.id)} style={sbutton.styles}>Remove ID: {this.props.book.id}</Button>
                 
                 
               </div>
           )
             
           }
-          
-
+        }  
+    
 export default BookCart;

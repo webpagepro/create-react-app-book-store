@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react';
 import { Card, Button, CardTitle, CardSubtitle, CardAuthor,CardText, Row } from 'reactstrap'
+import axios from 'axios'
 
 const sbutton = {
   styles: {
@@ -21,19 +22,36 @@ const leftColumn = {
 }
 
 
-const Book = (props) => {
- console.log("Book JS: ", props.book.id)
-  
+
+
+class Book extends Component{
+
+state = {
+//this.props.addBookToCart
+booksInCart: []
+}
+
+addBookToCart = (id) => {
+  axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
+  .then(res => {
+    let add = this.props.books.filter(book => book.id !== id)
+    this.setState({booksInCart: [...add, res.data]})
+  })
+}
+
+//const Book = (props) => {
+  render(){ console.log("Book JS: addBooksToCart", this.addBooksToCart)
+
     return (
 <div className="className='leftColumn"  style={leftColumn.styles}>
-  <div className="title">{props.book.title}<div className="price">${parseFloat(props.book.price).toFixed(2)}</div></div>
-    <div className="author">{props.book.author}</div> 
-          <div className="description">{props.book.description}</div> 
-          <div className="col-md-12"><Button onClick={()=> props.addBookToCart(props.book.id)} style={sbutton.styles}>Add To Cart {props.book.id}</Button></div>
+  <div className="title">{this.props.book.title}<div className="price">${parseFloat(this.props.book.price).toFixed(2)}</div></div>
+    <div className="author">{this.props.book.author}</div> 
+          <div className="description">{this.props.book.description}</div> 
+          <div className="col-md-12"><Button onClick={()=> this.addBookToCart(this.props.book.id)} style={sbutton.styles}>Add To Cart {this.props.book.id}</Button></div>
         
         
       </div>
   )
 }
-
+}
 export default Book
