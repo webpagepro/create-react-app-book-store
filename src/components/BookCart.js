@@ -34,7 +34,7 @@ removeBookFromCart = id => {
 
   render(){
     return (
-        <div className="rightColumn"  style={rightColumn.styles}> Shopping Cart
+        <div className="rightColumn"  style={rightColumn.styles}> 
           <div className="title">{this.props.book.title}</div>
             <div className="author">{this.props.book.author}</div> 
                 <div className="price-cart">${parseFloat(this.props.book.price).toFixed(2)}</div>

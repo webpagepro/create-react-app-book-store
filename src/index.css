@@ -41,3 +41,14 @@ margin-right:20px;
       .search{
         z-index:10;
       }
+
+      .card{
+        padding:8px;
+      }
+
+      .cartTitle{
+        text-align:right;
+        color:#f00;
+        top:-10px;
+        position:relative;
+      }

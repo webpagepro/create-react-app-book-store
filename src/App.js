@@ -20,6 +20,16 @@ class App extends Component {
     filteredBook: ''
 }
 
+InCart = () => this.state.books.filter (book =>  {
+  return book.inCart !== false
+ }) 
+
+ OutCart = () => this.state.books.filter (book =>  {
+ console.log("booksInCart ", this.state.books)
+ return book.inCart === false
+ }) 
+ 
+
   //booksInStore = () => this.state.booksInCart.filter (book => book.id)
 
 
@@ -43,18 +53,7 @@ this.setState({
 }
 
 
-InCart = () => this.state.books.filter (book =>  {
-  return book.inCart !== false
- }) 
 
- OutCart = () => this.state.books.filter (book =>  {
-  
-
-
- console.log("booksInCart ", this.state.books)
- return book.inCart === false
- }) 
- 
 
 render() {
    return (
@@ -70,9 +69,10 @@ render() {
 
      
      <Col sm="12" md={{ size: 8, offset: 0}} >
+     <Card>
 <Books books ={this.OutCart(this.state.books)}/>  
-</Col>
-     <Col sm="12" md={{ size: 4, offset: 0}} >
+</Card></Col>
+     <Col sm="12" md={{ size: 4, offset: 0}} ><div className="cartTitle">Shopping Cart</div>
 <Books2 books = {this.InCart(this.state.books)}/>   
       </Col> 
      </Row>   
