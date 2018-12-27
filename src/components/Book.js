@@ -26,12 +26,21 @@ const leftColumn = {
 
 class Book extends Component{
 
+state = {
+//this.props.addBookToCart
+booksInCart: []
+}
 
-
-
+addBookToCart = (id) => {
+  axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
+  .then(res => {
+    let add = this.props.books.filter(book => book.id !== id)
+    this.setState({booksInCart: [...add, res.data]})
+  })
+}
 
 //const Book = (props) => {
-  render(){ console.log("Book JS: addBooksToCart", this)
+  render(){ console.log("Book JS: addBooksToCart", this.addBooksToCart)
 
     return (
 <div className="className='leftColumn"  style={leftColumn.styles}>
