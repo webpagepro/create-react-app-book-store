@@ -28,16 +28,16 @@ state = {
     booksInCart: []
 }
 
- removeBookFromCart = id => {   
+ /*removeBookFromCart = id => {   
         axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
         .then(res => {
-          let otherBooks = this.state.books.filter(books => books.id == id)
+          let otherBooks = this.state.booksInCart.filter(books => books.id == id)
 
-        this.setState({ books: [...otherBooks, res.data]})
+        this.setState({ booksInCart: [...otherBooks, res.data]})
 
         })
       }
-
+*/
  render(){
     
 
@@ -46,7 +46,7 @@ state = {
           <div className="title">{this.props.book.title}</div>
             <div className="author">{this.props.book.author}</div> 
                 <div className="price-cart">${parseFloat(this.props.book.price).toFixed(2)}</div>
-                  <Button onClick={()=> this.removeBookFromCart(this.props.book.id)} style={sbutton.styles}>Remove ID: {this.props.book.id}</Button>
+                  <Button onClick={()=> this.props.removeBookFromCart(this.props.book.id)} style={sbutton.styles}>Remove ID: {this.props.book.id}</Button>
               </div>
              
              

@@ -12,9 +12,8 @@ import axios from 'axios'
 class App extends Component {
 
   state = {
-
     books: [],
-  
+    //booksInCart: []
 }
  
   async componentDidMount() {
@@ -29,6 +28,18 @@ class App extends Component {
     this.setState({books: json}) 
 }
 
+removeBookFromCart = id => {   
+  axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
+  .then(res => {
+    let otherBooks = this.state.books
+ //   otherBooks.inCart  = false;
+  this.setState({ books: [...otherBooks.filter(book => book.id !== id), res.data]})
+console.log("App.js: ", this)
+  })
+}
+
+
+
 //booksInCart = this.state.books.filter(book =>   book.inCart === true)
 
 filteredBookSearch = (e) => {
@@ -36,6 +47,7 @@ filteredBookSearch = (e) => {
     filtered_book: e.target.value
   })
 }
+
 render() { 
 console.log("booksInCart ", this.booksInCart)
    return (
@@ -53,8 +65,9 @@ console.log("booksInCart ", this.booksInCart)
 <Books books = {this.state.books.filter(book => book.inCart === false)}/>  
 </Card></Col>
      <Col sm="12" md={{ size: 4, offset: 0}} ><div className="cartTitle">Your Cart</div>
-<Books2 books = {this.state.books.filter(book => book.inCart === true)}/>   
+{/*<Books2 books = {this.state.books.filter(book => book.inCart === true)}/>   */}
 
+<Books2 books={this.state.books.filter(book => book.inCart === true)} removeBookFromCart={this.removeBookFromCart}></Books2>
       </Col> 
      </Row>   
              <Footer copy="2019" />
