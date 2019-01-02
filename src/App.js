@@ -29,8 +29,7 @@ class App extends Component {
     this.setState({books: json}) 
 }
 
-booksInCart = this.state.books.filter(book => 
-  book.inCart === true)
+//booksInCart = this.state.books.filter(book =>   book.inCart === true)
 
 filteredBookSearch = (e) => {
   this.setState({
