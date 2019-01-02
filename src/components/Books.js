@@ -1,34 +1,30 @@
 import React, { Component } from 'react'
 import Book from './Book'
 import axios from 'axios'
-//let Books = ({props}) =>  {
 
 class Books extends Component {
  state = ({
-booksInCart: []
+filteredSearch:  '',
+type: 'title'
+
  })
 
-   addBookToCart = (id) => {
-      axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
-      .then(res => {
-        let add = this.books.filter(book => book.id !== id)
-        this.setState({booksInCart: [...add, res.data]})
-      })
-    }
+render(){ 
+   let listOfBooks = this.props.books
+   //.filter(book => book.title.includes(this.state.filteredSearch))
+   .map(book => <Book key={book.id} book={book} />)
+ console.log("listOfBooks ", listOfBooks)
+  
+      let booksInCart = this.props.books
+      .filter(book => book.inCart === true)
+      
 
-render(){
-   let listedBooks = this.props.books.map(book => {
-  return <Book key={book.id} book={book} />
+      return(
 
- 
- })
-        return (
             <>
-                 {listedBooks} 
-                    </>     
-        )
-}
-
+            {listOfBooks} {booksInCart}
+                        </>    
+      )}      
 }
 
 export default Books;

@@ -23,28 +23,35 @@ const rightColumn = {
 }
 
 class BookCart extends Component {
-//const BookCart = (props) => {
-removeBookFromCart = id => {
-    axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
-    .then(res => {
-      let remove = this.props.books.filter(book => book.id !== id)
-      this.setState({ books: [...remove, res.data]})
-    })
-  }
+//const BookCart = (props) => 
+state = {
+    booksInCart: []
+}
 
-  render(){
+ removeBookFromCart = id => {   
+        axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
+        .then(res => {
+          let otherBooks = this.state.books.filter(books => books.id == id)
+
+        this.setState({ books: [...otherBooks, res.data]})
+
+        })
+      }
+
+ render(){
+    
+
     return (
-        <div className="rightColumn"  style={rightColumn.styles}> Shopping Cart
+        <div className="rightColumn"  style={rightColumn.styles}> 
           <div className="title">{this.props.book.title}</div>
             <div className="author">{this.props.book.author}</div> 
                 <div className="price-cart">${parseFloat(this.props.book.price).toFixed(2)}</div>
                   <Button onClick={()=> this.removeBookFromCart(this.props.book.id)} style={sbutton.styles}>Remove ID: {this.props.book.id}</Button>
-                
-                
               </div>
+             
+             
           )
-            
-          }
+         }
         }  
     
 export default BookCart;

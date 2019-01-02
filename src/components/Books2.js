@@ -2,20 +2,22 @@ import React, { Component } from 'react'
 import BookCart from './BookCart'
 
 //let Books = ({props}) =>  {
-
 class Books2 extends Component {
+    state = {
+        //this.props.addBookToCart
+        booksInCart: []
+        }
+
     render(){
-        let listedBooks = this.props.books.map(book => {
-       
+        let cartedBooks = this.props.books.map(book => {     
        return <BookCart key={book.id} book={book} />
-     
-       })
+ })
      
              return (
                        <div>
-                      {listedBooks} 
+                      {cartedBooks} 
                          </div>                                         
-             
+        
              )
      }
      

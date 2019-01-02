@@ -14,48 +14,31 @@ class App extends Component {
   state = {
 
     books: [],
-    booksInCart: [],
-    total:0,
-    availableBooks: [],
-    filteredBook: ''
+  
 }
-
-InCart = () => this.state.books.filter (book =>  {
-  return book.inCart !== false
- }) 
-
- OutCart = () => this.state.books.filter (book =>  {
- console.log("booksInCart ", this.state.books)
- return book.inCart === false
- }) 
  
+  async componentDidMount() {
 
-  //booksInStore = () => this.state.booksInCart.filter (book => book.id)
-
-
-async componentDidMount() {
   const response = await fetch('http://localhost:8082/api/books')
   const json = await response.json()
    if(!response)
    {
-    console.log("failed")
-  }
-  
-  this.setState({books: json})
-       console.log("setState books api res", this)
-
+    console.log("failed api response")
+   }  
+    console.log("async: ", this)
+    this.setState({books: json}) 
 }
 
+booksInCart = this.state.books.filter(book => 
+  book.inCart === true)
 
-filterBookSearch = (e) => {
-this.setState({ 
-  filtered_search : e.target.value})
+filteredBookSearch = (e) => {
+  this.setState({
+    filtered_book: e.target.value
+  })
 }
-
-
-
-
-render() {
+render() { 
+console.log("booksInCart ", this.booksInCart)
    return (
       <div className="App">
       <Container>
@@ -66,17 +49,16 @@ render() {
      
     
 <Row>
-
-     
      <Col sm="12" md={{ size: 8, offset: 0}} >
      <Card>
-<Books books ={this.OutCart(this.state.books)}/>  
+<Books books = {this.state.books.filter(book => book.inCart === false)}/>  
 </Card></Col>
-     <Col sm="12" md={{ size: 4, offset: 0}} ><div className="cartTitle">Shopping Cart</div>
-<Books2 books = {this.InCart(this.state.books)}/>   
+     <Col sm="12" md={{ size: 4, offset: 0}} ><div className="cartTitle">Your Cart</div>
+<Books2 books = {this.state.books.filter(book => book.inCart === true)}/>   
+
       </Col> 
      </Row>   
-             <Footer copy="2018" />
+             <Footer copy="2019" />
 </Container> 
 </div>
 
