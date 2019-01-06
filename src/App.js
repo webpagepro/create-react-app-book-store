@@ -32,10 +32,9 @@ addBookToCart = id => {
   axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
   .then(res => {
     let otherBooks = this.state.books
- //   otherBooks.inCart  = false;
   this.setState({ books: [...otherBooks.filter(book => book.id !== id), res.data]})
-console.log("App.js: res.data", this)
-  })
+console.log("App.js - addCameraToCart: ", this)
+})
 }
 
 removeBookFromCart = id => {
@@ -71,7 +70,7 @@ render() {
 <Books books = {this.state.books} addBookToCart={this.addBookToCart}/>
 </Card></Col>
      <Col sm="12" md={{ size: 4, offset: 0}} ><div className="cartTitle">Your Cart</div>
-<Books2 books={this.state.books.filter(book => book.inCart !== false)} removeBookFromCart={this.removeBookFromCart}></Books2>
+<Books2 booksInCart={this.state.books.filter(book => book.inCart !== false)} removeBookFromCart={this.removeBookFromCart}></Books2>
       </Col>
      </Row>
              <Footer copy="2019" />

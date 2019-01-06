@@ -8,7 +8,7 @@ componentWillReceiveProps(blah){
     console.log("blah blah", blah)
 }
     render(){
-        let cartedBooks = this.props.books.map(book => {     
+        let cartedBooks = this.props.booksInCart.map(book => {     
        return <BookCart key={book.id} book={book} removeBookFromCart={this.props.removeBookFromCart} />
  })
      
