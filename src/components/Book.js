@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardSubtitle, CardAuthor, CardText, Row } from 'reactstrap'
-import axios from 'axios'
+import { Button} from 'reactstrap'
+
 
 const sbutton = {
   styles: {
@@ -24,10 +24,7 @@ const leftColumn = {
 
 class Book extends Component {
 
-  state = {
-    //this.props.addBookToCart
-    books: []
-  }
+
 
   handleChange = e => {
     let { name, value } = e.target
@@ -36,22 +33,12 @@ class Book extends Component {
   }
 
 
-  addBookToCart = (id) => {
-    axios.patch(`http://localhost:8082/api/books/cart/add/${id}`)
-      .then(result => {
-        let otherBooks = this.props.books.filter(book => book.inCart !== true)
-        this.setState({ books: [...otherBooks, result.data] })
+  render() {   
+    console.log("baook", this.props.addBookToCart)
 
-      })
-  }
+    return this.props.addBookToCart?(
 
-  //()=> this.addBookToCart(this.props.book.id)
-
-  render() {
-    return (
-
-
-      <div className="className='leftColumn" style={leftColumn.styles}>
+      <div className="leftColumn" style={leftColumn.styles}>
         <div className="title">{this.props.book.title}<div className="price">${parseFloat(this.props.book.price).toFixed(2)}</div></div>
         <div className="author">{this.props.book.author}</div>
         <div className="description">{this.props.book.description}</div>
@@ -59,7 +46,7 @@ class Book extends Component {
 
 
       </div>
-    )
+    ):(<div>loading</div>)
   }
 }
 export default Book

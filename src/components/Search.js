@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormGroup, Input, Button, Form} from 'reactstrap'
+import {Input} from 'reactstrap'
 class Search extends Component {
     state = {
         query: '',

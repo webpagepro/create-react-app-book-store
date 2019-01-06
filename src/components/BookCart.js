@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Card, Button, CardTitle, CardText } from 'reactstrap'
-import axios from 'axios'
+import {Button} from 'reactstrap'
+
 
 const sbutton = {
     styles: {
@@ -24,20 +24,8 @@ const rightColumn = {
 
 class BookCart extends Component {
 //const BookCart = (props) => 
-state = {
-    booksInCart: []
-}
 
- /*removeBookFromCart = id => {   
-        axios.patch(`http://localhost:8082/api/books/cart/remove/${id}`)
-        .then(res => {
-          let otherBooks = this.state.booksInCart.filter(books => books.id == id)
 
-        this.setState({ booksInCart: [...otherBooks, res.data]})
-
-        })
-      }
-*/
  render(){
     
 

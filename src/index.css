@@ -23,7 +23,7 @@ body{font-size:10;}
 
 .price  {
 float:right;
-margin-right:20px;     
+margin-right:20px;
   }
 
   .title{
@@ -35,7 +35,7 @@ margin-right:20px;
   }
 
   .price-cart  {
-    font-weight:bold;   
+    font-weight:bold;
       }
 
       .search{
@@ -51,4 +51,8 @@ margin-right:20px;
         color:#f00;
         top:-10px;
         position:relative;
+      }
+
+      Search{
+        width:45%;
       }
