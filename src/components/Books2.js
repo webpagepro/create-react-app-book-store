@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import BookCart from './BookCart'
+const total = {
+    styles: {
+        marginTop: "41%",
+        float:'right'
+    }
+}
 
 //let Books = ({props}) =>  {
 class Books2 extends Component {
@@ -15,6 +21,9 @@ componentWillReceiveProps(blah){
              return (
                        <div>
                       {cartedBooks} 
+                      <h3 style={total.styles}>Total: ${this.props.booksInCart.reduce((accumulator, book) => {
+            return accumulator + book.price
+}, 0).toFixed(2)} </h3>
                          </div>                                         
         
              )
